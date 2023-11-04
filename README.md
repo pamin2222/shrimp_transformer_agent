@@ -1,6 +1,11 @@
 # ShrimpTransformer
-
 Welcome to ShrimpTransformer, the quirky chat application that transforms your conversations using the power of AI and a bit of humor. Ever wanted to spice up your chats with a specific word or phrase? ShrimpTransformer lets you do just that, replacing words in your conversation with your chosen keyword in various funny modes.
+
+### Shrimp Mode Demo
+![Shrimp Mode Demo](./assets/shrimp_demo.png)
+
+### Pad Thai Mode Demo
+![Pad Thai Mode Demo](./assets/padthai_demo.png)
 
 ## Features
 
