@@ -7,14 +7,6 @@ from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 import shrimp_helper
 from key_helper import check_openai_key
 import streamlit as st
-from enum import Enum
-
-
-class AIMode(Enum):
-    FULL_SHRIMP_MODE = 'Full Shrimp Mode'
-    PARTIAL_SHRIMP_MODE = 'Partial Shrimp Mode'
-    NORMAL = 'Normal'
-
 
 # Add input for OpenAI API key
 with st.sidebar:
@@ -30,13 +22,7 @@ with st.sidebar:
         key="ai_mode",
         options=["Full Shrimp Mode", "Partial Shrimp Mode", "Normal"],
     )
-
-# Map the selected radio option to the enum
-ai_mode_enum = {
-    "Full Shrimp Mode": AIMode.FULL_SHRIMP_MODE,
-    "Partial Shrimp Mode": AIMode.PARTIAL_SHRIMP_MODE,
-    "Normal": AIMode.NORMAL,
-}[ai_mode_selection]
+    "[View the source code](https://github.com/pamin2222/shrimp_transformer_agent)"
 
 st.title("Shrimp Transformer")
 st.caption("")
@@ -54,7 +40,6 @@ if "llm_shrimp_memory" not in st.session_state:
 else:
     llm_shrimp_memory = st.session_state.llm_shrimp_memory
 
-
 # Render current messages from StreamlitChatMessageHistory
 for msg in msgs.messages:
     st.chat_message(msg.type).write(msg.content)
@@ -64,7 +49,7 @@ if len(msgs.messages) == 0:
     st.chat_message("system").write(init_msg)
 
 
-def generate_conversation(latest_response, ai_mode, st):
+def generate_conversation(latest_response, ai_mode_selection, st):
     llm_shrimp_conver_chain = ConversationChain(
         llm=llm_shrimp,
         verbose=True,
@@ -76,9 +61,11 @@ def generate_conversation(latest_response, ai_mode, st):
                                                                 target_word=target_word_input)
 
     ai_response = llm_shrimp_conver_chain.predict(input=user_w_params)
-    if ai_mode == AIMode.FULL_SHRIMP_MODE:
+    if ai_mode_selection == "Full Shrimp Mode":
+        print("FULL_SHRIMP_MODE")
         shrimpified_response = ' '.join(
             [target_word_input if target_word_input not in word else word for word in ai_response.split()])
+        print("shrimpified_response:", shrimpified_response)
         ai_response = shrimpified_response
 
     # Add the AI response to the conversation container
@@ -96,4 +83,4 @@ if prompt := st.chat_input():
     msgs.add_user_message(prompt)
     st.chat_message("user").write(prompt)
     latest_response = generate_conversation(prompt, ai_mode_selection, st)
-    print("ai_mode:", ai_mode_selection)
+    print("ai_mode_selection:", ai_mode_selection)
