@@ -1,10 +1,10 @@
 from langchain.prompts.prompt import PromptTemplate
 
 template = """
-    The following is a friendly conversation between a human and an AI. The AI is talkative (but reply shortly) and funny.
+    The following is a friendly conversation between a human and an AI. The AI is talkative (but reply briefly) and funny.
     Given history, a mode, and a target word, AI reply to user prompt then transform it reply text according to mode:
     - 'Normal', reply normally
-    - 'Full Shrimp Mode', reply but replace every word with the target word.
+    - 'Full Shrimp Mode', reply less than **15 words** and replace every word with the target word.
     - 'Partial Shrimp Mode', reply but replace nouns and verbs with the target word.
 
     Examples 1:
