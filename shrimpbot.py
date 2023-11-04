@@ -33,7 +33,7 @@ msgs = StreamlitChatMessageHistory(key="history")
 check_openai_key(openai_api_key)
 
 # Set up LLMs
-llm_shrimp = ChatOpenAI(temperature=0.0, model="gpt-3.5-turbo", request_timeout=10)
+llm_shrimp = ChatOpenAI(temperature=0.0, model="gpt-3.5-turbo", request_timeout=30)
 if "llm_shrimp_memory" not in st.session_state:
     llm_shrimp_memory = ConversationBufferMemory()
     st.session_state.llm_shrimp_memory = llm_shrimp_memory
