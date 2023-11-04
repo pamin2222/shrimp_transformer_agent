@@ -10,7 +10,6 @@ import streamlit as st
 
 # Add input for OpenAI API key
 with st.sidebar:
-    openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
     target_word_input = st.text_input(
         "Text input for AI to use",
         "Shrimp",
@@ -22,7 +21,11 @@ with st.sidebar:
         key="ai_mode",
         options=["Full Shrimp Mode", "Partial Shrimp Mode", "Normal"],
     )
-    "[View the source code](https://github.com/pamin2222/shrimp_transformer_agent)"
+    st.info("Full Shrimp Mode: Every word in the AI's response is replaced with your chosen keyword.")
+    st.info("Partial Shrimp Mode: Only nouns and verbs in the AI's response are replaced with your chosen keyword.")
+    openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
+    "[Inspired by this post](https://www.facebook.com/groups/cursedaiwtf/posts/1395288517746294)"
+
 
 st.title("Shrimp Transformer")
 st.caption("")
