@@ -23,6 +23,7 @@ with st.sidebar:
         "Text input for AI to use",
         "Shrimp",
         key="placeholder",
+        max_chars=10
     )
     ai_mode_selection = st.radio(
         "Set word replace mode 👉",
@@ -46,8 +47,13 @@ msgs = StreamlitChatMessageHistory(key="history")
 check_openai_key(openai_api_key)
 
 # Set up LLMs
-llm_shrimp = ChatOpenAI(temperature=0.0, model="gpt-3.5-turbo")
-llm_shrimp_memory = ConversationBufferMemory()
+llm_shrimp = ChatOpenAI(temperature=0.0, model="gpt-3.5-turbo", request_timeout=10)
+if "llm_shrimp_memory" not in st.session_state:
+    llm_shrimp_memory = ConversationBufferMemory()
+    st.session_state.llm_shrimp_memory = llm_shrimp_memory
+else:
+    llm_shrimp_memory = st.session_state.llm_shrimp_memory
+
 
 # Render current messages from StreamlitChatMessageHistory
 for msg in msgs.messages:
