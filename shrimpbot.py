@@ -19,7 +19,7 @@ with st.sidebar:
     ai_mode_selection = st.radio(
         "Set word replace mode 👉",
         key="ai_mode",
-        options=["Full Shrimp Mode", "Partial Shrimp Mode", "Normal"],
+        options=["Partial Shrimp Mode", "Full Shrimp Mode", "Normal"],
     )
     st.info("Full Shrimp Mode: Every word in the AI's response is replaced with your chosen keyword.")
     st.info("Partial Shrimp Mode: Only nouns and verbs in the AI's response are replaced with your chosen keyword.")
