@@ -55,7 +55,7 @@ if len(msgs.messages) == 0:
 def generate_conversation(latest_response, ai_mode_selection, st):
     llm_shrimp_conver_chain = ConversationChain(
         llm=llm_shrimp,
-        verbose=True,
+        verbose=False,
         memory=llm_shrimp_memory,
         prompt=shrimp_helper.shrimpify_prompt_template
     )
@@ -65,10 +65,10 @@ def generate_conversation(latest_response, ai_mode_selection, st):
 
     ai_response = llm_shrimp_conver_chain.predict(input=user_w_params)
     if ai_mode_selection == "Full Shrimp Mode":
-        print("FULL_SHRIMP_MODE")
+        #print("FULL_SHRIMP_MODE")
         shrimpified_response = ' '.join(
             [target_word_input if target_word_input not in word else word for word in ai_response.split()])
-        print("shrimpified_response:", shrimpified_response)
+        #print("shrimpified_response:", shrimpified_response)
         ai_response = shrimpified_response
 
     # Add the AI response to the conversation container
@@ -86,4 +86,4 @@ if prompt := st.chat_input():
     msgs.add_user_message(prompt)
     st.chat_message("user").write(prompt)
     latest_response = generate_conversation(prompt, ai_mode_selection, st)
-    print("ai_mode_selection:", ai_mode_selection)
+    #print("ai_mode_selection:", ai_mode_selection)

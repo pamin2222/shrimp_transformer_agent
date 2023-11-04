@@ -23,6 +23,7 @@ template = """
     
     History: {history}
     
+    
     {input}
     Transformed AI reply:"""
 
